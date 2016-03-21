@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="sketch">
+<head>
+	<meta charset="utf-8">
+	<title>画布练习</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="angular.js"></script>
+	<script src="index.js"></script>
+</head>
+<body  ng-controller="sketchController">
+	<div class="zuo">
+		<input ng-model="canvasWH.width" type="range" min="400" max="800" step="1">
+		<input ng-model="canvasWH.height" type="range" min="400" max="800" step="1">
+		<ul>
+			<li  ng-repeat="(key, value) in tools" ng-class="{active:value==tool}" ng-click="settool(value)">
+				<span>{{key}}</span>
+			</li>
+
+		</ul>
+		<hr>
+		<ul>
+			<li ng-click="setStyle('fill')" ng-class="{active:csState.style=='fill'}" >填充 <input type="color" ng-model="csState.fillStyle" ></li>
+			<li ng-click="setStyle('stroke')"ng-class="{active:csState.style=='stroke'}" >画线 <input type="color" ng-model="csState.strokeStyle"></li>
+			<li>线宽度  <input type="range" min="1" max="30" step="1" ng-model="csState.lineWidth"></li>
+		</ul>
+		<hr>
+		<ul>
+			<li ng-click="newSketch()"}>新建</li>
+			<li><a ng-click="save($event)">保存</a>	</li>
+			<li>回退</li>
+		</ul>
+		
+	</div>
+	<div class="you">
+		<canvas id="canvas" width="{{canvasWH.width}}" height="{{canvasWH.height}}"></canvas>
+	</div>
+
+</body>
+<style type="text/CSS">
+            input[type="range"] {
+                -webkit-box-shadow: 0 1px 0 0px #424242, 0 1px 0 #060607 inset, 0px 2px 10px 0px black inset, 1px 0px 2px rgba(0, 0, 0, 0.4) inset, 0 0px 1px rgba(0, 0, 0, 0.6) inset;
+                margin-top: 2px;
+                background-color: #272728;
+                border-radius: 15px;
+               -webkit-appearance: none;
+                height:8px;
+            }
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                cursor: default;
+                top: -5px;
+                margin-top:9px;
+                height:16px;
+                width: 16px;
+                transform: translateY(-4px);
+                background: none repeat scroll 0 0 #0dad51;
+                border-radius: 15px;
+                -webkit-box-shadow: 0 -1px 1px black inset;
+            }
+        </style> 
+
+</html>
